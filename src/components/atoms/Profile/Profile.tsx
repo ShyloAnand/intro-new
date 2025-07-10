@@ -53,6 +53,7 @@ const Profile = ({ onLogout }: ProfileProps) => {
   };
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
+
   return (
     <div>
       <div className="mt-10">
@@ -78,9 +79,7 @@ const Profile = ({ onLogout }: ProfileProps) => {
                 </Button>
               </Card>
             ))}
-            <div className="text-right font-bold text-lg">
-              Total: ₹{cart.reduce((sum, item) => sum + item.price, 0)}
-            </div>
+            <div className="text-right font-bold text-lg">Total: ₹{total}</div>
           </div>
         )}
       </div>

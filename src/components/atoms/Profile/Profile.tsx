@@ -10,17 +10,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { NavigationMenuDemo } from "../NavBar/NavBar";
-import profilePic from "./../../../../public/images/images.png";
+// import profilePic from "./../../../../public/images/images.png";
 import Image from "next/image";
-import pic from "./../../../../public/images/French Elegant Pleated Flounce Floral Print Long Dress, Sleeveless V-Neck Ruffled Dress, Summer New Ladies Light Blue Gown.jpeg";
-import pic1 from "./../../../../public/images/shop1.webp";
-import pic2 from "./../../../../public/images/shop2.webp";
 
 type Dress = {
   id: number;
   name: string;
   price: number;
-  image: any;
+  image: string;
 };
 
 type ProfileProps = {
@@ -36,19 +33,19 @@ const Profile = ({ onLogout }: ProfileProps) => {
       id: 1,
       name: "Floral Summer Dress",
       price: 999,
-      image: pic,
+      image: "/images/shop1.webp",
     },
     {
       id: 2,
       name: "Elegant Evening Gown",
       price: 2499,
-      image: pic1,
+      image: "/images/shop1.webp",
     },
     {
       id: 3,
       name: "Casual Cotton Dress",
       price: 799,
-      image: pic2,
+      image: "/images/shop1.webp",
     },
   ];
 

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -10,57 +10,52 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import Profile from "../Profile/Profile"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Profile from "../Profile/Profile";
 
 // Profile component shown after login
 
-
 export function LoginCard() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [showSignup, setShowSignup] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showSignup, setShowSignup] = useState(false);
 
-  const [newEmail, setNewEmail] = useState("")
-  const [newPassword, setNewPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
+  const correctEmail = "user@example.com";
+  const correctPassword = "123456";
 
-  const correctEmail = "user@example.com"
-  const correctPassword = "123456"
-
-  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (email === correctEmail && password === correctPassword) {
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
     } else {
-      alert("Invalid email or password")
+      alert("Invalid email or password");
     }
-  }
-  
-  
+  };
 
   if (isLoggedIn) {
-    return <Profile onLogout={() => setIsLoggedIn(false)} />
+    return <Profile onLogout={() => setIsLoggedIn(false)} />;
   }
 
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (newPassword !== confirmPassword) {
-      alert("Passwords do not match")
-      return
+      alert("Passwords do not match");
+      return;
     }
-    alert("Account created!")
-    setShowSignup(false)
-  }
+    alert("Account created!");
+    setShowSignup(false);
+  };
 
   if (isLoggedIn) {
-    return <Profile onLogout={() => setIsLoggedIn(false)} />
+    return <Profile onLogout={() => setIsLoggedIn(false)} />;
   }
 
   if (showSignup) {
@@ -115,24 +110,20 @@ export function LoginCard() {
           </form>
         </CardContent>
       </Card>
-    )
+    );
   }
 
-  
- 
-  
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-[400px]">
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
         <CardDescription>
           Enter your email below to login to your account
         </CardDescription>
         <CardAction>
-        <Button variant="link" onClick={() => setShowSignup(true)}>
-  Sign Up
-</Button>
-
+          <Button variant="link" onClick={() => setShowSignup(true)}>
+            Sign Up
+          </Button>
         </CardAction>
       </CardHeader>
       <CardContent>
@@ -179,5 +170,5 @@ export function LoginCard() {
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

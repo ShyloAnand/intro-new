@@ -5,7 +5,6 @@ export default function Home() {
   return (
     <div className="w-full lg:w-[900px] flex justify-center p-4  m-auto pt-5 lg:pt-20">
       <LoginCard />
-      login test
     </div>
   );
 }

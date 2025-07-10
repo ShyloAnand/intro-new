@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-// import { ProfileDetail } from "../ProfileDetail/ProfileDetail";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,6 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { NavigationMenuDemo } from "../NavBar/NavBar";
+
 type Dress = {
   id: number;
   name: string;
@@ -22,13 +23,15 @@ type ProfileProps = {
 };
 
 const Profile = ({ onLogout }: ProfileProps) => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState<Dress[]>([]);
-  const dresses = [
+
+  const dresses: Dress[] = [
     {
       id: 1,
       name: "Floral Summer Dress",
       price: 999,
-      image: "",
+      image: "/images/dress1.jpg",
     },
     {
       id: 2,
@@ -40,59 +43,48 @@ const Profile = ({ onLogout }: ProfileProps) => {
       id: 3,
       name: "Casual Cotton Dress",
       price: 799,
-      image: "",
+      image: "/images/dress3.jpg",
     },
   ];
+
+  const filteredDresses = dresses.filter((dress) =>
+    dress.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const addToCart = (item: Dress) => {
     setCart([...cart, item]);
   };
 
-  const removeFromCart = (id: number) => {
-    setCart(cart.filter((item) => item.id !== id));
-  };
-
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-
   return (
     <div>
-      <div className="mt-10">
-        <h3 className="text-xl font-semibold mb-4">🛒 Your Cart</h3>
-        {cart.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          <div className="space-y-4">
-            {cart.map((item) => (
-              <Card
-                key={item.id}
-                className="flex justify-between items-center p-4"
-              >
-                <div>
-                  <p className="font-medium">{item.name}</p>
-                  <p className="text-sm text-muted">₹{item.price}</p>
-                </div>
-                <Button
-                  variant="destructive"
-                  onClick={() => removeFromCart(item.id)}
-                >
-                  Remove
-                </Button>
-              </Card>
-            ))}
-            <div className="text-right font-bold text-lg">Total: ₹{total}</div>
-          </div>
-        )}
-      </div>
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Welcome to Dress Shop 👗</h2>
-          <Button onClick={onLogout} variant="destructive">
-            Logout
-          </Button>
-        </div>
+      {/* Navigation with cart count */}
+      <NavigationMenuDemo cart={cart} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {dresses.map((dress) => (
+      {/* Header */}
+      <div className="flex justify-between items-center p-4">
+        <h2 className="text-2xl font-bold">Welcome to Dress Shop 👗</h2>
+        <Button onClick={onLogout} variant="destructive">
+          Logout
+        </Button>
+      </div>
+
+      {/* Search */}
+      <div className="px-4">
+        <input
+          type="text"
+          placeholder="Search dresses..."
+          className="w-full p-2 border rounded mb-6"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      {/* Dress Cards */}
+      <div className="px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {filteredDresses.length === 0 ? (
+          <p className="col-span-full text-center">No results found.</p>
+        ) : (
+          filteredDresses.map((dress) => (
             <Card key={dress.id} className="hover:shadow-lg transition-all">
               <CardHeader>
                 <img
@@ -111,19 +103,9 @@ const Profile = ({ onLogout }: ProfileProps) => {
                 </Button>
               </CardFooter>
             </Card>
-          ))}
-        </div>
+          ))
+        )}
       </div>
-
-      {/* <div className="p-6 text-center w-full">
-        <ProfileDetail />
-        <Button
-          onClick={onLogout}
-          className="bg-red-500 hover:bg-red-600 text-white mt-4"
-        >
-          Logout
-        </Button>
-      </div> */}
     </div>
   );
 };

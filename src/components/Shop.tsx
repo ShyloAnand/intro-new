@@ -5,16 +5,18 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { NavigationMenuDemo } from "./atoms/NavBar/NavBar";
+import pic1 from "./../../public/images/French Elegant Pleated Flounce Floral Print Long Dress, Sleeveless V-Neck Ruffled Dress, Summer New Ladies Light Blue Gown.jpeg";
+import Image from "next/image";
 
 type Dress = {
   id: number;
   name: string;
   price: number;
-  image: string;
+  image: any;
 };
 
 const dresses: Dress[] = [
-  { id: 1, name: "Floral Dress", price: 999, image: "/images/dress1.jpg" },
+  { id: 1, name: "Floral Dress", price: 999, image: pic1 },
   { id: 2, name: "Evening Gown", price: 2499, image: "/images/dress2.jpeg" },
   { id: 3, name: "Evening Gown", price: 2499, image: "/images/dress2.jpeg" },
   { id: 4, name: "Evening Gown", price: 2499, image: "/images/dress2.jpeg" },
@@ -31,10 +33,12 @@ const Shop = () => {
             {dresses.map((dress) => (
               <Card key={dress.id}>
                 <CardHeader>
-                  <img
+                  <Image
                     src={dress.image}
                     alt={dress.name}
-                    className="w-full h-64 object-cover"
+                    width={400} // actual image width in pixels
+                    height={250} // actual image height in pixels
+                    className="object-cover rounded"
                   />
                   <CardTitle>{dress.name}</CardTitle>
                 </CardHeader>
